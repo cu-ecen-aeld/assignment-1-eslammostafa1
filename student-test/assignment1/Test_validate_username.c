@@ -12,11 +12,25 @@
 *   3) Use unity assertion TEST_ASSERT_EQUAL_STRING_MESSAGE to verify the two strings are equal.  See
 *       the [unity assertion reference](https://github.com/ThrowTheSwitch/Unity/blob/master/docs/UnityAssertionsReference.md)
 */
+
+// assignment 1 error 1 function
+// void test_validate_my_username()
+// {
+//     /**
+//      * TODO: Replace the line below with your code here as described above to verify your /conf/username.txt 
+//      * config file and my_username() functions are setup properly
+//      */
+//     TEST_ASSERT_TRUE_MESSAGE(false,"AESD students, please fix me!");
+// }
+
 void test_validate_my_username()
 {
-    /**
-     * TODO: Replace the line below with your code here as described above to verify your /conf/username.txt 
-     * config file and my_username() functions are setup properly
-     */
-    TEST_ASSERT_TRUE_MESSAGE(false,"AESD students, please fix me!");
+    // Call my_username() function to get hard-coded username
+    const char* expected_username = my_username();
+
+    // Obtain username from conf file using assignment autotest submodule function
+    const char* actual_username = malloc_username_from_conf_file();
+
+    // Verify the two strings are equal
+    TEST_ASSERT_EQUAL_STRING_MESSAGE(expected_username, actual_username, "Username mismatch");
 }
