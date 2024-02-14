@@ -5,18 +5,17 @@ if [ $# -ne 2 ]; then
     exit 1
 fi
 
-writefile=$1
-writestr=$2
+writefile="$1"
+writestr="$2"
+writedir=$(dirname "$writefile")
 
-if [ ! -f "$writefile" ]; then
-    echo "Error: $writefile is not a exist. creating file ..."
-    touch "$writefile"
+# Create the directory if it doesn't exist
+if [ ! -d "$writedir" ]; then
+    echo "Creating directory: $writedir"
+    mkdir -p "$writedir" || { echo "Error: Unable to create directory $writedir"; exit 1; }
 fi
 
-if [ -s "$writefile" ]; then
-    echo "File is not empty, will take a new content "
-else
-    echo "File is empty or does not exist"
-fi
+# Create or overwrite the file with the given content
+echo "$writestr" > "$writefile" || { echo "Error: Unable to write to file $writefile"; exit 1; }
 
-echo "$writestr" > "$writefile"
+echo "File created or updated: $writefile"
